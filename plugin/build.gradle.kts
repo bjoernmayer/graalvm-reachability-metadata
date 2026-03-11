@@ -11,6 +11,9 @@ dependencies {
     implementation(libs.graalvm.reachabilityMetadata)
 }
 
+group = "io.github.bjoernmayer"
+version = "0.0.1"
+
 gradlePlugin {
     website = "https://github.com/bjoernmayer/graalvm-reachability-metadata"
     vcsUrl = "https://github.com/bjoernmayer/graalvm-reachability-metadata"
