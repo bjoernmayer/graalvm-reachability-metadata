@@ -13,9 +13,11 @@ relevant metadata into your build directory — ready to be passed to `native-im
 ## Motivation
 
 The official [GraalVM Native Build Tools](https://github.com/graalvm/native-build-tools) Gradle plugin already includes
-a metadata repository feature. However, it has known issues with
-the [Gradle configuration cache](https://docs.gradle.org/current/userguide/configuration_cache.html) and does not work
-reliably in multi-module projects. These limitations can cause broken builds or force you to disable the configuration
+a metadata repository feature. However, it has [known issues](https://github.com/graalvm/native-build-tools/issues/477)
+with
+the [Gradle configuration cache](https://docs.gradle.org/current/userguide/configuration_cache.html) and [does not work
+reliably in multi-module projects](https://github.com/graalvm/native-build-tools/issues/760). These limitations can
+cause broken builds or force you to disable the configuration
 cache entirely — negating one of Gradle's most impactful performance features.
 
 This plugin was created to work around those problems by re-implementing the metadata repository functionality from
