@@ -1,0 +1,19 @@
+# Version catalog is a central place for you to declare and version dependencies
+# https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
+# https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
+
+[versions]
+graalvmNativeImage = "0.11.5"
+kotlin = "2.3.10"
+ktlint = "1.8.0"
+ktlint-gradle = "14.1.0"
+pluginPublish = "2.1.0"
+
+[libraries]
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+graalvm-reachabilityMetadata = { module = "org.graalvm.buildtools:graalvm-reachability-metadata", version.ref = "graalvmNativeImage" }
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+ktlint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktlint-gradle" }
+plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "pluginPublish" }
