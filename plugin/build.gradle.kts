@@ -14,6 +14,10 @@ dependencies {
 group = "io.github.bjoernmayer"
 version = "0.0.2"
 
+tasks.jar {
+    archiveBaseName.set("graalvm-reachability-metadata")
+}
+
 gradlePlugin {
     website = "https://github.com/bjoernmayer/graalvm-reachability-metadata"
     vcsUrl = "https://github.com/bjoernmayer/graalvm-reachability-metadata"
