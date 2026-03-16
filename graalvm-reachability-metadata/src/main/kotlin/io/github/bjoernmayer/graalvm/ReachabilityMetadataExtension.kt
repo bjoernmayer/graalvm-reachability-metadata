@@ -48,4 +48,16 @@ abstract class ReachabilityMetadataExtension {
      * under a different version than the artifact version on the classpath.
      */
     abstract val moduleToConfigVersion: MapProperty<String, String>
+
+    /**
+     * When `true`, if an exact version match is not found in the metadata
+     * repository, the latest available configuration is used instead.
+     *
+     * This mirrors the behaviour of the official `native-build-tools` plugin and
+     * is useful for new library versions that have not been tested yet but are
+     * likely compatible with the latest available metadata.
+     *
+     * Default: `false`.
+     */
+    abstract val useLatestConfigWhenVersionIsUntested: Property<Boolean>
 }
