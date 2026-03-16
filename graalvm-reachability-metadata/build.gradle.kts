@@ -12,7 +12,7 @@ dependencies {
 }
 
 group = "io.github.bjoernmayer"
-version = "0.0.4"
+version = "0.1.0"
 
 gradlePlugin {
     website = "https://github.com/bjoernmayer/graalvm-reachability-metadata"
