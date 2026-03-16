@@ -50,7 +50,7 @@ That's it. The plugin registers a `collectReachabilityMetadata` task that you ca
 ./gradlew collectReachabilityMetadata
 ```
 
-The collected metadata will be written to `build/native-reachability-metadata/` by default.
+The collected metadata will be written to `build/generated/native-reachability-metadata/` by default.
 
 ## Configuration
 
@@ -59,23 +59,26 @@ All settings are optional. Defaults are shown below:
 ```kts
 reachabilityMetadata {
     // Version of the GraalVM reachability metadata repository to download
-    repositoryVersion.set("0.11.5")
+    repositoryVersion = "0.11.5"
 
     // Which configuration's dependencies to analyze
-    classpathConfigurationName.set("runtimeClasspath")
+    classpathConfigurationName = "runtimeClasspath"
 
     // Where to copy the collected metadata
-    outputDir.set(layout.buildDirectory.dir("native-reachability-metadata"))
+    outputDir = layout.buildDirectory.dir("generated/native-reachability-metadata")
 
     // Modules to exclude from metadata collection ("group:artifact")
-    excludes.set(emptySet())
+    excludes = emptySet()
     // Example:
     // excludes.add("com.example:some-lib")
 
     // Override the metadata version used for specific modules ("group:artifact" -> "version")
-    moduleToConfigVersion.set(emptyMap())
+    moduleToConfigVersion = emptyMap()
     // Example:
     // moduleToConfigVersion.put("com.example:some-lib", "1.2.3")
+
+    // Fall back to the latest available metadata when the exact version is untested
+    useLatestConfigWhenVersionIsUntested = false
 }
 ```
 

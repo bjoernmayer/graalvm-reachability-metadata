@@ -40,9 +40,10 @@ class GraalvmReachabilityMetadataPlugin : Plugin<Project> {
                 .apply {
                     repositoryVersion.convention("0.11.5")
                     classpathConfigurationName.convention("runtimeClasspath")
-                    outputDir.convention(target.layout.buildDirectory.dir("native-reachability-metadata"))
+                    outputDir.convention(target.layout.buildDirectory.dir("generated/native-reachability-metadata"))
                     excludes.convention(emptySet())
                     moduleToConfigVersion.convention(emptyMap())
+                    useLatestConfigWhenVersionIsUntested.convention(false)
                 }
 
         // 2. Create a resolvable-only configuration for fetching the repository zip.
@@ -107,7 +108,12 @@ class GraalvmReachabilityMetadataPlugin : Plugin<Project> {
             // Forward extension properties to the task
             task.excludes.set(extension.excludes)
             task.moduleToConfigVersion.set(extension.moduleToConfigVersion)
+            task.repositoryVersion.set(extension.repositoryVersion)
+            task.useLatestConfigWhenVersionIsUntested.set(extension.useLatestConfigWhenVersionIsUntested)
             task.outputDir.set(extension.outputDir)
+            task.reportFile.set(
+                target.layout.buildDirectory.file("reports/graalvm-reachability-metadata/report.txt"),
+            )
         }
     }
 
