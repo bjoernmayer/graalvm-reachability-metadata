@@ -20,8 +20,8 @@ reliably in multi-module projects](https://github.com/graalvm/native-build-tools
 cause broken builds or force you to disable the configuration
 cache entirely — negating one of Gradle's most impactful performance features.
 
-This plugin was created to work around those problems by re-implementing the metadata repository functionality from
-scratch with full configuration cache compatibility and correct behavior in multi-module setups.
+This plugin was created to work around those problems by re-implementing the metadata repository functionality with
+full configuration cache compatibility and correct behavior in multi-module setups.
 
 ## Features
 
@@ -138,13 +138,13 @@ Changes to the plugin source will be picked up automatically — no publishing s
 ### Building
 
 ```sh
-./gradlew :plugin:build
+./gradlew :graalvm-reachability-metadata:build
 ```
 
 ### Running checks
 
 ```sh
-./gradlew :plugin:check
+./gradlew :graalvm-reachability-metadata:check
 ```
 
 This runs compilation, tests, and ktlint.
