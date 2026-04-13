@@ -8,10 +8,13 @@ kotlin = "2.3.10"
 ktlint = "1.8.0"
 ktlint-gradle = "14.1.0"
 pluginPublish = "2.1.0"
+junit = "6.0.3"
 
 [libraries]
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 graalvm-reachabilityMetadata = { module = "org.graalvm.buildtools:graalvm-reachability-metadata", version.ref = "graalvmNativeImage" }
+junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
+junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 
 [plugins]
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
