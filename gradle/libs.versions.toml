@@ -3,7 +3,7 @@
 # https://docs.gradle.org/current/userguide/platforms.html#sub::toml-dependencies-format
 
 [versions]
-graalvmNativeImage = "0.11.5"
+graalvmNativeImage = "1.0.0"
 kotlin = "2.3.10"
 ktlint = "1.8.0"
 ktlint-gradle = "14.1.0"
@@ -12,7 +12,7 @@ junit = "6.0.3"
 
 [libraries]
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
-graalvm-reachabilityMetadata = { module = "org.graalvm.buildtools:graalvm-reachability-metadata", version.ref = "graalvmNativeImage" }
+graalvm-reachabilityMetadata = { module = "org.graalvm.buildtools:graalvm-reachability-metadata", version.ref = "graalvmNativeImage" } # https://mvnrepository.com/artifact/org.graalvm.buildtools/graalvm-reachability-metadata
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
 junit-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 

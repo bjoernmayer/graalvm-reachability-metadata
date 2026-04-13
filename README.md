@@ -59,7 +59,7 @@ All settings are optional. Defaults are shown below:
 ```kts
 reachabilityMetadata {
     // Version of the GraalVM reachability metadata repository to download
-    repositoryVersion = "0.11.5"
+    repositoryVersion = "1.0.0"
 
     // Which configuration's dependencies to analyze
     classpathConfigurationName = "runtimeClasspath"

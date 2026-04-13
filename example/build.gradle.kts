@@ -19,8 +19,8 @@ dependencies {
 // ── Plugin configuration (all settings are optional) ────────────────────────
 reachabilityMetadata {
     // Version of the GraalVM reachability metadata repository to download.
-    // Default: "0.11.5"
-    // repositoryVersion = "0.11.5"
+    // Default: "1.0.0"
+    // repositoryVersion = "1.0.0"
 
     // Which Gradle configuration's resolved dependencies to analyze.
     // Default: "runtimeClasspath"

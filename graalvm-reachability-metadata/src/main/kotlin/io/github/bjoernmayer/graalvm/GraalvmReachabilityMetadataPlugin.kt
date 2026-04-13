@@ -26,7 +26,7 @@ import java.io.File
  * }
  *
  * reachabilityMetadata {
- *     repositoryVersion.set("0.11.5")
+ *     repositoryVersion.set("1.0.0")
  *     excludes.add("com.example:some-lib")
  * }
  * ```
@@ -38,7 +38,7 @@ class GraalvmReachabilityMetadataPlugin : Plugin<Project> {
             target.extensions
                 .create("reachabilityMetadata", ReachabilityMetadataExtension::class.java)
                 .apply {
-                    repositoryVersion.convention("0.11.5")
+                    repositoryVersion.convention("1.0.0")
                     classpathConfigurationName.convention("runtimeClasspath")
                     outputDir.convention(target.layout.buildDirectory.dir("generated/native-reachability-metadata"))
                     excludes.convention(emptySet())
