@@ -110,6 +110,19 @@ tasks.named("jar") {
 This automatically wires up task dependencies — Gradle will run `collectReachabilityMetadata` before `jar` and include
 the metadata files in the JAR output.
 
+## Example
+
+The [`example/`](example/) directory contains a standalone Gradle project that applies the plugin and declares
+dependencies with known metadata entries. It uses `includeBuild` to load the plugin from source — no publishing step
+required.
+
+```sh
+cd example
+../gradlew collectReachabilityMetadata
+```
+
+See [`example/README.md`](example/README.md) for details.
+
 ## Developing
 
 Checkout this repository next to some project where you want to use it. Then in the `settings.gradle.kts` of said
