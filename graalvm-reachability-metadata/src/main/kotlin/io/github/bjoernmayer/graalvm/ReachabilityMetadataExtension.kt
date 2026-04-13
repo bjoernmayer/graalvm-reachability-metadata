@@ -57,7 +57,7 @@ abstract class ReachabilityMetadataExtension {
      * is useful for new library versions that have not been tested yet but are
      * likely compatible with the latest available metadata.
      *
-     * Default: `false`.
+     * Default: `true`.
      */
     abstract val useLatestConfigWhenVersionIsUntested: Property<Boolean>
 }
