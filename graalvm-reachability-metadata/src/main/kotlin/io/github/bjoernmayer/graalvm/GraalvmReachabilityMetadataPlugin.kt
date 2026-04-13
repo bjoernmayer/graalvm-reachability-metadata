@@ -43,7 +43,7 @@ class GraalvmReachabilityMetadataPlugin : Plugin<Project> {
                     outputDir.convention(target.layout.buildDirectory.dir("generated/native-reachability-metadata"))
                     excludes.convention(emptySet())
                     moduleToConfigVersion.convention(emptyMap())
-                    useLatestConfigWhenVersionIsUntested.convention(false)
+                    useLatestConfigWhenVersionIsUntested.convention(true)
                 }
 
         // 2. Create a resolvable-only configuration for fetching the repository zip.

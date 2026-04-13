@@ -37,5 +37,6 @@ reachabilityMetadata {
     // moduleToConfigVersion.put("com.example:some-lib", "1.2.3")
 
     // Fall back to the latest available metadata when the exact version is untested.
-    useLatestConfigWhenVersionIsUntested = true
+    // Default: true
+    // useLatestConfigWhenVersionIsUntested = true
 }
