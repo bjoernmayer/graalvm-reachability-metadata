@@ -97,7 +97,7 @@ abstract class CollectReachabilityMetadataTask : DefaultTask() {
 
     /**
      * Version of the GraalVM reachability metadata repository (e.g.
-     * `"0.11.5"`).  Used as a cache input so that changing the repository
+     * `"1.0.0"`).  Used as a cache input so that changing the repository
      * version correctly invalidates the build cache even when the set of
      * resolved coordinates stays the same.
      */

@@ -86,8 +86,8 @@ class CollectReachabilityMetadataFunctionalTest {
             assertEquals(TaskOutcome.SUCCESS, result.task(":collectReachabilityMetadata")!!.outcome)
             assertTrue(outputDir.isDirectory, "Output directory should exist")
             assertTrue(
-                outputDir.walk().any { it.name == "reflect-config.json" },
-                "Expected reflect-config.json in output",
+                outputDir.walk().any { it.name == "reachability-metadata.json" },
+                "Expected reachability-metadata.json in output",
             )
             assertTrue(reportFile.exists(), "Report file should exist")
             val report = reportFile.readText()

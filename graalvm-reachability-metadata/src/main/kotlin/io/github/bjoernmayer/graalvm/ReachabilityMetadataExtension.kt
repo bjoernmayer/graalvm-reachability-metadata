@@ -19,7 +19,7 @@ import org.gradle.api.provider.SetProperty
 abstract class ReachabilityMetadataExtension {
     /**
      * Version of the `org.graalvm.buildtools:graalvm-reachability-metadata` artifact
-     * to resolve (e.g. "0.11.5"). This determines which repository zip is downloaded.
+     * to resolve (e.g. "1.0.0"). This determines which repository zip is downloaded.
      */
     abstract val repositoryVersion: Property<String>
 
