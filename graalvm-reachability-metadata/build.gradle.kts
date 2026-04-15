@@ -51,7 +51,7 @@ tasks {
 // endregion
 
 group = "io.github.bjoernmayer"
-version = "1.0.0"
+version = "1.0.1"
 
 gradlePlugin {
     website = "https://github.com/bjoernmayer/graalvm-reachability-metadata"
