@@ -226,4 +226,44 @@ class CollectReachabilityMetadataFunctionalTest {
             assertEquals(TaskOutcome.UP_TO_DATE, result.task(":collectReachabilityMetadata")!!.outcome)
         }
     }
+
+    @Nested
+    inner class ConfigurationCache {
+        private fun ccRunner(vararg args: String) =
+            GradleRunner
+                .create()
+                .withProjectDir(projectDir)
+                .withPluginClasspath()
+                .withArguments(*args, "--stacktrace", "--configuration-cache")
+                .forwardOutput()
+
+        @Test
+        fun `task is compatible with configuration cache`() {
+            buildFile.writeText(
+                """
+                plugins {
+                    java
+                    id("io.github.bjoernmayer.graalvm-reachability-metadata")
+                }
+
+                repositories { mavenCentral() }
+
+                dependencies {
+                    implementation("com.fasterxml.jackson.core:jackson-databind:2.18.3")
+                }
+                """.trimIndent(),
+            )
+
+            // First run stores the configuration cache entry
+            val firstRun = ccRunner("collectReachabilityMetadata").build()
+            assertEquals(TaskOutcome.SUCCESS, firstRun.task(":collectReachabilityMetadata")!!.outcome)
+
+            // Second run reuses the configuration cache entry
+            val secondRun = ccRunner("collectReachabilityMetadata").build()
+            assertTrue(
+                secondRun.output.contains("Reusing configuration cache"),
+                "Expected configuration cache to be reused on second run",
+            )
+        }
+    }
 }

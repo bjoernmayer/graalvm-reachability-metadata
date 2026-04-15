@@ -74,10 +74,6 @@ class GraalvmReachabilityMetadataPlugin : Plugin<Project> {
                 "reachabilityMetadataRepositoryService",
                 ReachabilityMetadataRepositoryService::class.java,
             ) { spec ->
-                // Lazily resolve the zip file — only evaluated when the service is first used
-                spec.parameters.repositoryZip.set(
-                    target.layout.file(target.providers.provider { repoZipConfig.singleFile }),
-                )
                 // Cache directory is keyed by version so different versions don't collide
                 spec.parameters.unpackDir.set(
                     target.layout.dir(extension.repositoryVersion.map { ver -> File(cacheBase, ver) }),
@@ -104,6 +100,13 @@ class GraalvmReachabilityMetadataPlugin : Plugin<Project> {
             // Declare the shared service dependency so Gradle can coordinate access
             task.repositoryService.set(repoService)
             task.usesService(repoService)
+
+            // Wire the resolved repository zip via the configuration's elements
+            // provider – this is configuration-cache safe because Gradle tracks
+            // artifact transforms/resolutions expressed through this provider chain.
+            task.repositoryZipFile.fileProvider(
+                repoZipConfig.elements.map { locations -> locations.single().asFile },
+            )
 
             // Forward extension properties to the task
             task.excludes.set(extension.excludes)
