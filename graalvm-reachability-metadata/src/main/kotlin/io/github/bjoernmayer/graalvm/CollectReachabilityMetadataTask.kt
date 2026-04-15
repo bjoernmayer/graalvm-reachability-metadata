@@ -12,10 +12,13 @@ import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import java.util.ArrayDeque
 
@@ -96,6 +99,18 @@ abstract class CollectReachabilityMetadataTask : DefaultTask() {
     abstract val repositoryService: Property<ReachabilityMetadataRepositoryService>
 
     /**
+     * The resolved repository zip file (classifier=repository, ext=zip).
+     *
+     * Wired from the resolvable configuration in the plugin.  Kept on the task
+     * (rather than in the build-service parameters) so that configuration
+     * resolution happens via a proper Gradle provider chain, which is
+     * configuration-cache safe.
+     */
+    @get:InputFile
+    @get:PathSensitive(PathSensitivity.NONE)
+    abstract val repositoryZipFile: RegularFileProperty
+
+    /**
      * Version of the GraalVM reachability metadata repository (e.g.
      * `"1.0.0"`).  Used as a cache input so that changing the repository
      * version correctly invalidates the build cache even when the set of
@@ -157,7 +172,7 @@ abstract class CollectReachabilityMetadataTask : DefaultTask() {
         output.toFile().deleteRecursively()
         output.toFile().mkdirs()
 
-        val repo = repositoryService.get().repository
+        val repo = repositoryService.get().getRepository(repositoryZipFile.get().asFile)
         val excludeSet = excludes.getOrElse(emptySet())
         val versionOverrides = moduleToConfigVersion.getOrElse(emptyMap())
         val useLatest = useLatestConfigWhenVersionIsUntested.getOrElse(false)
