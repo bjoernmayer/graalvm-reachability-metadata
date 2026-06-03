@@ -81,7 +81,10 @@ class GraalvmReachabilityMetadataPlugin : Plugin<Project> {
                 spec.parameters.forceUnpack.convention(false)
             }
 
-        // 4. Register the main task that walks the dependency graph and copies metadata
+        // 4. Register the main task that walks the dependency graph and copies metadata.
+        //    The repositoryService property is annotated @ServiceReference, which tells
+        //    Gradle to handle cross-ClassLoader service sharing automatically — making
+        //    the explicit usesService() call unnecessary.
         target.tasks.register("collectReachabilityMetadata", CollectReachabilityMetadataTask::class.java) { task ->
             task.group = "build"
             task.description = "Copies GraalVM reachability metadata for all runtimeClasspath dependencies"
@@ -97,9 +100,9 @@ class GraalvmReachabilityMetadataPlugin : Plugin<Project> {
                 },
             )
 
-            // Declare the shared service dependency so Gradle can coordinate access
+            // Wire the shared service — @ServiceReference on the task property handles
+            // the usesService() registration automatically.
             task.repositoryService.set(repoService)
-            task.usesService(repoService)
 
             // Wire the resolved repository zip via the configuration's elements
             // provider – this is configuration-cache safe because Gradle tracks
