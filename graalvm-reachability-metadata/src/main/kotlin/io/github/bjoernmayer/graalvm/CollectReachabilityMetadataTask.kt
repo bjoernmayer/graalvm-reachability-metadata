@@ -10,6 +10,7 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.MapProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.SetProperty
+import org.gradle.api.services.ServiceReference
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
@@ -92,10 +93,15 @@ abstract class CollectReachabilityMetadataTask : DefaultTask() {
 
     /**
      * Handle to the shared [ReachabilityMetadataRepositoryService] that
-     * provides the unpacked metadata repository.  Marked [@Internal] because
-     * it is a service reference, not a cacheable input.
+     * provides the unpacked metadata repository.
+     *
+     * Annotated with [@ServiceReference][ServiceReference] so that Gradle
+     * correctly bridges the build service across ClassLoader scopes when the
+     * plugin is applied to multiple sibling projects via a convention plugin.
+     * Without this annotation, Gradle loads the service type independently per
+     * project scope, causing a type-mismatch error at task configuration time.
      */
-    @get:Internal
+    @get:ServiceReference
     abstract val repositoryService: Property<ReachabilityMetadataRepositoryService>
 
     /**
